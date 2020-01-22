@@ -118,6 +118,20 @@ User groups and sub-groups are setup already and allow users to be admins of the
 
 Routes and logic are present in the boilerplate to handle many typical user actions such as logging in and resetting their password. (User registration isn't baked in right now, but user creation is available via the CLI).
 
+## Miscellaneous Parts/Tips
+
+### Bootstrapping New Modules
+
+One thing that drove me crazy was putting together all the boilerplate code that was required for Nest modules. To combat that, I created a script that will scaffold out a full module for you in one command with a controller, resolver, entity, service, module, and spec (test) file. You can run it with `./scripts/bootstrapModule <name_of_module_in_camel_case>`. For instance: `./scripts/bootstrapModule newTest` will create modules that will have the class name prefix of `NewTest` and file name prefix of `newTest`.
+
+### Testing
+
+I have admittedly no testing in this boilerplate (bad, I know). I do generate spec files when bootstrapping modules and utilize the testing library that Nest provides which is detailed [here](https://docs.nestjs.com/fundamentals/testing).
+
+### Security Notes
+
+One thing I know that I do not handle properly is API keys and password reset tokens. These are both sensitive pieces of information and as such should be stored encrypted in the database.
+
 ---
 
 Hopefully this post gives you a good overview of the boilerplate I've made so that you might be able to utilize it as well (check out its `README.md` for some more details). Otherwise, I hope that this explained enough reasoning in the decisions I made to help you with creating boilerplates of your own!
