@@ -128,9 +128,22 @@ One thing that drove me crazy was putting together all the boilerplate code that
 
 I have admittedly no testing in this boilerplate (bad, I know). I do generate spec files when bootstrapping modules and utilize the testing library that Nest provides which is detailed [here](https://docs.nestjs.com/fundamentals/testing).
 
-### Security Notes
+### Security Note
 
 One thing I know that I do not handle properly is API keys and password reset tokens. These are both sensitive pieces of information and as such should be stored encrypted in the database.
+
+### Deployment
+
+This is still a work in progress piece for me. I've been toying with different ways of deploying/running the app as you can probably tell from the various configuration files and scripts. I'd encourage you to try out different options and just use whatever works best for you. Here's a list of the methods I've tried:
+
+- Deploying the raw TS files and using `ts-node` to run things.
+  - This approach seems to usually be the easiest and I don't see any real meaningful downsides to just using `ts-node` over `node`.
+- Building the transpiled JS files through `npm run build`
+  - This option and the previous are usually pretty comparable for me.
+- Running everything in Docker
+  - This will definitely be my go-to for deployment if my environment requires anything outside of a basic node install. For instance I've had a project where I called a few Python scripts from my Node app so I managed everything in Docker to avoid having to install Node, Python, and any additional dependencies in each place I wanted to deploy.
+- Using [Zeit's pkg](https://github.com/zeit/pkg)
+  - This is the newest one I've tried and I really like it. It compiles your entire project into a single executable files which makes distribution a breeze. It also bundles a Node runtime as well making it extremely portable. There some hurdles in figuring out how it handled file management, but overall this approach seems really promising for most projects and probably will be my preferred choice going forward. Check out `build-binary.ts` to see it being used.
 
 ---
 
